@@ -12,7 +12,7 @@ services:
       - "3000:3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`your-domain.com`)"
+      - "traefik.http.routers.app.rule=Host(`https://pgw4kwgocs4804kowsso8o4c.coolify.dt-e.eu`)"
       - "traefik.http.services.app.loadbalancer.server.port=3000"
       - "traefik.http.routers.app.entrypoints=web"
       - "traefik.http.services.app.loadbalancer.healthcheck.path=/health"
