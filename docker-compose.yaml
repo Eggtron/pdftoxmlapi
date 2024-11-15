@@ -2,15 +2,11 @@ version: '3.8'
 
 services:
   app:
-
-    image: node:18 # Verwende das offizielle Node-Image als Basis
-    container_name: PDF2XML
-    working_dir: /app
-    volumes:
-      - ./app:/app  # Mountet den Ordner "app" aus dem Host-Directory
+    build:
+      context: .         # Verweis auf das aktuelle Verzeichnis, wo die Dockerfile liegt
+      dockerfile: Dockerfile
     environment:
       - PORT=3000
       - API_SECRET=${API_SECRET} # Liest die Umgebungsvariable aus .env oder Coolify
     ports:
       - "3000:3000"
-    command: "node main.js"
