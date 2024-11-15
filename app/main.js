@@ -76,6 +76,11 @@ app.post('/api/upload', checkApiSecret, upload.single('file'), async (req, res) 
   }
 });
 
+// Healthcheck-Endpoint
+app.get('/health', (req, res) => {
+  res.status(200).send({ status: 'OK' });
+});
+
 app.listen(PORT, () => {
   console.log(`Server läuft auf Port ${PORT}`);
 });
