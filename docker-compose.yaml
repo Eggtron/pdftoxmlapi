@@ -5,7 +5,7 @@ services:
     image: node:18 # Verwende das offizielle Node-Image als Basis
     working_dir: /app
     volumes:
-      - .:/app
+      - ./app:/app  # Mountet den Ordner "app" aus dem Host-Directory
     environment:
       - PORT=3000
       - API_SECRET=${API_SECRET} # Liest die Umgebungsvariable aus .env oder Coolify
