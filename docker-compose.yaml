@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:18 # Verwende das offizielle Node-Image als Basis
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - PORT=3000
+      - API_SECRET=${API_SECRET} # Liest die Umgebungsvariable aus .env oder Coolify
+    ports:
+      - "3000:3000"
+    command: "node src/main.js"
