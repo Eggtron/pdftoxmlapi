@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   app:
+  .build:
     image: node:18 # Verwende das offizielle Node-Image als Basis
+    container_name: PDF2XML
     working_dir: /app
     volumes:
       - ./app:/app  # Mountet den Ordner "app" aus dem Host-Directory
