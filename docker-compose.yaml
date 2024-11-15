@@ -13,4 +13,4 @@ services:
       - API_SECRET=${API_SECRET} # Liest die Umgebungsvariable aus .env oder Coolify
     ports:
       - "3000:3000"
-    command: "node app/main.js"
+    command: "node main.js"
