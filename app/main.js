@@ -4,7 +4,7 @@ import multer from 'multer';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const API_SECRET = process.env.API_SECRET;
+const API_SECRET = '12345' //TODO: Eingabe von API_SECRET aus der.env-Datei einlesen
 
 // Multer-Konfiguration für Datei-Uploads
 const storage = multer.diskStorage({
@@ -42,11 +42,12 @@ const formatResponse = (data, format) => {
 
 // POST-Endpoint zum Hochladen einer Datei mit Secret-Prüfung und Antwortformat
 app.post('/api/upload', checkApiSecret, upload.single('file'), async (req, res) => {
+  console.log('PDF Upload'); //R: entfernen
   try {
     // Eingehende Datei und gewünschtes Antwortformat überprüfen
     const file = req.file;
     const responseFormat = req.headers['x-response-format'] || req.headers['accept'] || 'json';
-    
+
     // Beispieldaten als Antwortinhalt
     const data = {
       message: 'Datei erfolgreich hochgeladen!',
@@ -58,18 +59,11 @@ app.post('/api/upload', checkApiSecret, upload.single('file'), async (req, res) 
       }
     };
 
-    // Antwort basierend auf dem gewünschten Format senden
-    if (responseFormat.includes('xml')) {
-      res.setHeader('Content-Type', 'application/xml');
-      res.send(formatResponse(data, 'xml'));
-    } else if (responseFormat.includes('both')) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(formatResponse(data, 'both'));
-    } else {
-      // Standard: JSON
-      res.setHeader('Content-Type', 'application/json');
-      res.send(formatResponse(data, 'json'));
-    }
+
+    // Standard: JSON
+    res.setHeader('Content-Type', 'application/json');
+    res.send(formatResponse(data, 'json'));
+
   } catch (error) {
     console.error('Fehler beim Verarbeiten der Anfrage:', error);
     res.status(500).send({ message: 'Fehler beim Verarbeiten der Anfrage' });
@@ -78,6 +72,7 @@ app.post('/api/upload', checkApiSecret, upload.single('file'), async (req, res) 
 
 // Healthcheck-Endpoint
 app.get('/health', (req, res) => {
+  console.log('HeEaltcheck') //R: entfernen
   res.status(200).send({ status: 'OK' });
 });
 
